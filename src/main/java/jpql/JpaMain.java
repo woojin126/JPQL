@@ -16,11 +16,31 @@ public class JpaMain {
         tx.begin();
         try {
             //공통 으로 사용
+
+      /*      Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
+            Team team1 = new Team();
+            team1.setName("teamB");
+            em.persist(team1);
+
+            Team team2 = new Team();
+            team2.setName("teamC");
+            em.persist(team2);
+
             Member member = new Member();
             member.setUsername("member1");
             member.setAge(10);
-            em.persist(member);
+            member.changeTeam(team);
 
+            em.persist(member);
+            Member member1 = new Member();
+            member1.setUsername("member2");
+            member1.setAge(20);
+            member1.changeTeam(team1);
+            em.persist(member1);
+*/
             /**
              * 반환 타입이 명확하면 TypeQuery
              * 반환 타입이 불명확하면 Query
@@ -77,11 +97,11 @@ public class JpaMain {
              *  엔티티 프로젝션한 모든 셀렉트절  select m from Member m
              *  한개는 수십개든 영속성 컨텍스에 관리가 된다!
              */
-            List<Member> result = em.createQuery("select m from Member m",Member.class)
+           /* List<Member> result = em.createQuery("select m from Member m",Member.class)
                     .getResultList();
             Member findMember = result.get(0);
             findMember.setAge(120);
-
+*/
             /**
              * -엔티티 타입 프로젝션-
              * 작성한 sql은 결과 sql과 비슷하게 쓰는게좋다.
@@ -153,7 +173,7 @@ public class JpaMain {
              * 페이징
              */
 
-            /*em.flush();
+            em.flush();
             em.clear();
             for(int i=0; i<100;i++){
                 Member member = new Member();
@@ -165,12 +185,82 @@ public class JpaMain {
                     .setFirstResult(1)
                     .setMaxResults(10)
                     .getResultList();
-
+/*
             log.info("result.size={}",result.size());
             for (Member member1 : resultPaging) {
                 log.info("member1={}",member1);
             }*/
+            /**
+             * 조인
+             */
 
+
+            /**
+             * INNER JOIN
+             */
+      /*
+            em.flush();
+            em.clear();
+            String query = "select m from Member m inner join m.team t";
+            List<Member> resultInnerJoin = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            resultInnerJoin.stream().forEach(System.out::println);*/
+
+            /**
+             * OUTER LEFT JOIN
+             */
+
+      /*      em.flush();
+            em.clear();
+            String query = "select m from Member m LEFT join m.team t";
+            List<Member> resultInnerJoin = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            resultInnerJoin.stream().forEach(System.out::println);*/
+
+            /**
+             * 세타조인
+             */
+         /*   em.flush();
+            em.clear();
+            String query = "select m from Member m,Team t where m.username = t.name";
+            List<Member> resultInnerJoin = em.createQuery(query, Member.class)
+                    .getResultList();
+
+            resultInnerJoin.stream().forEach(System.out::println);*/
+
+            /**
+             * 조인 -ON 절
+             * 1.조인 대상 필터링
+             * 2.연관관계 없는 엔티티 외부 조인
+             */
+
+            /**
+             *  1.조인 대상 필터링
+             */
+       /*     em.flush();
+            em.clear();
+            String query = "select m from Member m LEFT JOIN m.team t ON t.id = 1";
+            List resultList = em.createQuery(query).getResultList();
+
+            resultList.stream().forEach(System.out::println);
+            System.out.println("resultSize==" + resultList.size());
+*/
+            /**
+             * * 2.연관관계 없는 엔티티 외부 조인
+             */
+/*
+
+            em.flush();
+            em.clear();
+            String query = "select m from Member m LEFT JOIN Team t ON m.username =t.name";
+            List<Member> resultList = em.createQuery(query, Member.class).getResultList();
+
+            resultList.stream().forEach(System.out::println);
+            System.out.println(resultList.size()+"사이즈");
+
+*/
 
 
             tx.commit();
