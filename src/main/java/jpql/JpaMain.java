@@ -3,6 +3,7 @@ package jpql;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -17,7 +18,7 @@ public class JpaMain {
         try {
             //공통 으로 사용
 
-      /*      Team team = new Team();
+       Team team = new Team();
             team.setName("teamA");
             em.persist(team);
 
@@ -30,8 +31,9 @@ public class JpaMain {
             em.persist(team2);
 
             Member member = new Member();
-            member.setUsername("member1");
+            member.setUsername("관리자");
             member.setAge(10);
+            member.setType(MemberType.ADMIN);
             member.changeTeam(team);
 
             em.persist(member);
@@ -40,7 +42,7 @@ public class JpaMain {
             member1.setAge(20);
             member1.changeTeam(team1);
             em.persist(member1);
-*/
+
             /**
              * 반환 타입이 명확하면 TypeQuery
              * 반환 타입이 불명확하면 Query
@@ -173,7 +175,7 @@ public class JpaMain {
              * 페이징
              */
 
-            em.flush();
+          /*  em.flush();
             em.clear();
             for(int i=0; i<100;i++){
                 Member member = new Member();
@@ -184,7 +186,7 @@ public class JpaMain {
             List<Member> resultPaging = em.createQuery("select m from Member m order by m.age desc", Member.class)
                     .setFirstResult(1)
                     .setMaxResults(10)
-                    .getResultList();
+                    .getResultList();*/
 /*
             log.info("result.size={}",result.size());
             for (Member member1 : resultPaging) {
@@ -262,6 +264,138 @@ public class JpaMain {
 
 */
 
+            /**
+             * JPQL 타입표현
+             * 문자 'HELLO'
+             * 숫자 10L(Long), 10D(Double), 10F(Float)
+             * Boolean : TRUE , FALSE
+             * ENUM :jpabook.MemberType.Admin(패키지명 포함)
+             * 엔티티 타입:TYPE(m) =Member(상속 관계에서 사용
+             */
+
+         /*   em.flush();
+            em.clear();
+            //    "where m.type = jpql.MemberType.ADMIN";
+            String query = "select m.username, 'HELLO', true FROM Member m " +
+                            "where m.type = :userType";
+            List<Object[]> result = em.createQuery(query)
+                    .setParameter("userType",MemberType.ADMIN)
+                    .getResultList();
+
+            for (Object[] objects : result) {
+                System.out.println("objects[0] = " + objects[0]);
+                System.out.println("objects[1] = " + objects[1]);
+                System.out.println("objects[2] = " + objects[2]);
+            }*/
+
+            /**
+             * 조건식 -기본 CASE 식
+             */
+
+/*
+            em.flush();
+            em.clear();
+
+            String query =
+                    "select " +
+                            " case when m.age <= 10 then '학생요금' " +
+                            "      when m.age >= 10 then '경로요금' " +
+                            "      else  '일반요금' " +
+                            " end " +
+                    "from Member m";
+
+            List<String> result = em.createQuery(query, String.class)
+                    .getResultList();
+
+            for (String s : result) {
+                System.out.println("s = " + s);
+            }
+*/
+
+            /**
+             * COALESCE : 하나씩 조회해서 NULL이 아니면 반환
+             * NULLIF: 두 값이 같으면 null 반환, 다르면 첫번째 값 반환
+             */
+
+ /*           em.flush();
+            em.clear();
+
+            //사용자 이름이 없으면 이름없는 회원 반환
+            //String query = "select coalesce(m.username,'이름없는 회원') as username from Member m";
+            //사용자 이름이 '관리자'면 null을 반환하고 나머지는 본인 이름반환
+            String query = "select nullif(m.username, '관리자') as username from Member m ";
+
+            List<String> result = em.createQuery(query, String.class).getResultList();
+            for (String s : result) {
+                System.out.println("s = " + s);
+            }*/
+
+            /**
+             * JPQL 기본 함수
+             */
+      /*      em.flush();
+            em.clear();
+
+            String query = "select concat('a','b') FROM Member m";
+            String query1 = "select substring(m.username,2,3) FROM Member m";
+            String query2 = "select locate('de','abcdefg') FROM Member m";//de위치번호 4번쨰
+            String query3 = "select size(t.members) from Team t"; //t.members의 크기
+            List<Integer> result = em.createQuery(query3,Integer.class)
+                    .getResultList();
+
+            for (Integer s : result) {
+                System.out.println("s = " + s);
+            }*/
+
+            /**
+             * 경로 표현식 특징
+             * 상태필드(state field): 경로 탐색의 끝, 탐색x
+             * 단일 값 연관 경로: 묵시적 내부조인(inner join)발생, 탐색O
+             * 컬렉션 값 연관 경로 : 묵시적 내부조인 발생, 탐색X
+             * from절에서 명시적 조인을 통해 별칭을 얻으면 별칭을 통해 탐색가능
+             *
+             * 실무에서는 그냥 묵시적 조인 사용하지말아라!!!!!!!!!!!!!!!!!!!!!
+             * 다 명시적으로 써라 (select m from Member m join m.team t) 이런식
+             */
+
+            /**
+             * 경로 탐색을 사용한 묵시적 조인 시 주의사항
+             * 1.항상 내부조인
+             * 2.컬렉션은 경로탐색의 끝, 명시적 조인을 통해 별칭을 얻어야함
+             * 3.경로 탐색은 주로 SELECT, WHERE절에서 사용하지만 묵시적 조인으로 인해
+             * SQL의 FROM(JOIN)절에 영향을줌
+             */
+
+            em.flush();
+            em.clear();
+            //m.username은 사태필드, 더이상 타고들어갈 필드가없다 경로탐색의 끝
+            String query = "select m.username from Member m ";
+
+            //단일값 연관 경로 m.team은 묵시적 내부조인발생, 탐색 더가능 m.team -> m.team.name //여기까지와서는 다시 상태필드가됨 (탐색 끝)
+            //m.team 객체에서는 이렇게 타고들어가면 되지만 디비에서는 JOIN을 발생시켜야함 그것임 묵시적 조인
+            //주의:묵시적조인이 발생하지않도록 작성하는게좋음 실무에서는 수백개의 쿼리가잇음 (직관적으로 만들자는 뜻 운영이쉽게)
+            String query1 = "select m.team from Member m ";
+            List<Team> result = em.createQuery(query1,Team.class).getResultList();
+            for (Team team3 : result) {
+
+                System.out.println("team3 = " + team3);
+            }
+
+            //컬렉션값 연관경로는 묵시적 내부조인 발생하지만 탐색은 x  -> m.members.username 이안됨 -> 해결책 (from절에 명시적인 조인사용
+            // 컬렉션 자체값을 조회하는거기떄문에 더 이상 타고들어가기 불사
+            String query2 = "select t.members from Team t";
+            Collection result2 = em.createQuery(query2,Collection.class).getResultList();
+            for (Object o : result2) {
+                System.out.println("o = " + o);
+            }
+
+            // m.member.username 까지 탐색하는 방법. from절에 명시적인 조인사용
+            String query3 = "select m.username from Team t join t.members m"; //m.member.username 까지 탐색하는 방법. from절에 명시적인 조인사용
+            List<String> resultList = em.createQuery(query3, String.class).getResultList();
+
+            for (String s : resultList) {
+                System.out.println("s = " + s);
+            }
 
             tx.commit();
         }catch (Exception e){
