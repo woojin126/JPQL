@@ -57,13 +57,13 @@ public class JpaMain {
             member7.setTeam(teamB);
             em.persist(member7);
 
-             /*
+
           Member member2 = new Member();
             member2.setUsername("회원2");
             member2.setAge(15);
             member2.setTeam(teamB);
             em.persist(member2);
-
+  /*
             Member member3 = new Member();
             member3.setUsername("회원3");
             member3.setAge(15);
@@ -467,10 +467,11 @@ public class JpaMain {
             /**
              * @ManyToOne  or ManyToMany case
              **/
+
 /*
 
-            String query = "select m from Member m"; //프록시
-            //String query = "select m from Member m join fetch m.team"; //프록시가아닌 진짜데이터 (한방쿼리) :: 페치 조인 엄청중요 (LAZY 로 설정을해놨어도 fetch join이 우선순위)
+            //String query = "select m from Member m"; //프록시
+            String query = "select m from Member m join fetch m.team"; //프록시가아닌 진짜데이터 (한방쿼리) :: 페치 조인 엄청중요 (LAZY 로 설정을해놨어도 fetch join이 우선순위)
             List<Member> resultList = em.createQuery(query, Member.class).getResultList();
 
             for (Member members : resultList) {
@@ -483,6 +484,7 @@ public class JpaMain {
                 //회원 100명 -> N + 1 문제
             }
 */
+
 
 
             /**
@@ -579,8 +581,8 @@ public class JpaMain {
              * 3.실무에서 글로벌 로딩 전략은 모두 지연 로딩
              * 4.최적화가 필요한 곳은 페치 조인 적용 (N+1이 터지는곳에서 페치조인 적용하면 좋다?)
              */
-         /*   //일대다 중심 쿼리인 아래쿼리로는 페이징이 매우 위험.
-            //String query = "select t from Team t join fetch t.members";
+        /*    //일대다 중심 쿼리인 아래쿼리로는 페이징이 매우 위험.
+            String query = "select t from Team t join fetch t.members";
 
             //대안1
             //맴버를 중심으로 페이징 시작 회원 -> 팀은 다대일 (이러면 페이징 위험 x)
@@ -594,11 +596,15 @@ public class JpaMain {
             String query2 = "select t From Team t";
             List<Team> result = em.createQuery(query2,Team.class)
                     .setFirstResult(0)
-                    .setMaxResults(4)
+                    .setMaxResults(2)
                     .getResultList();
-
+*//*
             System.out.println("result.size() = " + result.size());
 
+            for (Member member : result) {
+                System.out.println("------------> member.getUsername() = " + member.getTeam());
+
+            }*//*
             for (Team team : result) {
                 System.out.println("team = " + team.getName() + " || " + team.getMembers().size());
                 for (Member member : team.getMembers()) {
@@ -619,20 +625,15 @@ public class JpaMain {
                 }
             }*/
 
-
-             String query = "select t from Team t join t.members m";
+            String query = "select t from Team t join fetch t.members";
             List<Team> resultList = em.createQuery(query, Team.class).getResultList();
 
-            System.out.println("resultList.get(0).getMembers() = " + resultList.get(0).getMembers());
-
-
-
-
-
-
-
-
-
+            for (Team team : resultList) {
+                System.out.println("team = " + team.getName());
+                for(Member member : team.getMembers()){
+                    System.out.println("------------>member = " + member);
+                }
+            }
 
 
             /**
