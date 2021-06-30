@@ -18,31 +18,75 @@ public class JpaMain {
         try {
             //공통 으로 사용
 
-       Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("팀A");
+            em.persist(teamA);
 
-            Team team1 = new Team();
-            team1.setName("teamB");
-            em.persist(team1);
 
-            Team team2 = new Team();
-            team2.setName("teamC");
-            em.persist(team2);
+            Team teamB = new Team();
+            teamB.setName("팀B");
+            em.persist(teamB);
+/*
 
-            Member member = new Member();
-            member.setUsername("관리자");
-            member.setAge(10);
-            member.setType(MemberType.ADMIN);
-            member.changeTeam(team);
+            Team teamC = new Team();
+            teamC.setName("팀C");
+            em.persist(teamC);
 
-            em.persist(member);
+
+            Team teamD = new Team();
+            teamD.setName("팀D");
+            em.persist(teamD);
+
+            Team teamE = new Team();
+            teamE.setName("팀E");
+            em.persist(teamE);
+
+            Team teamF = new Team();
+            teamF.setName("팀F");
+            em.persist(teamF);*/
+
             Member member1 = new Member();
-            member1.setUsername("member2");
-            member1.setAge(20);
-            member1.changeTeam(team1);
+            member1.setUsername("회원1");
+            member1.setAge(10);
+            member1.setTeam(teamA);
             em.persist(member1);
 
+            Member member7 = new Member();
+            member7.setUsername("회원7");
+            member7.setAge(10);
+            member7.setTeam(teamB);
+            em.persist(member7);
+
+             /*
+          Member member2 = new Member();
+            member2.setUsername("회원2");
+            member2.setAge(15);
+            member2.setTeam(teamB);
+            em.persist(member2);
+
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.setAge(15);
+            member3.setTeam(teamB);
+            em.persist(member3);
+
+            Member member4 = new Member();
+            member4.setUsername("회원4");
+            member4.setTeam(teamD);
+            em.persist(member4);
+
+            Member member5 = new Member();
+            member5.setUsername("회원5");
+            member5.setTeam(teamE);
+            em.persist(member5);
+
+            Member member6 = new Member();
+            member6.setUsername("회원6");
+            member6.setTeam(teamF);
+            em.persist(member6);
+*/
+            em.flush();
+            em.clear();
             /**
              * 반환 타입이 명확하면 TypeQuery
              * 반환 타입이 불명확하면 Query
@@ -109,28 +153,29 @@ public class JpaMain {
              * 작성한 sql은 결과 sql과 비슷하게 쓰는게좋다.
              * 튜닝요소도 많고, 한눈에 보이는게 좋다
              */
-            //맴버에 team을 찾는거라 조인을해서 찾아옴 그런데 아래 sql은 되도록이면 만들어진 sql과 비슷하게 써야한다..
+        /*    //맴버에 team을 찾는거라 조인을해서 찾아옴 그런데 아래 sql은 되도록이면 만들어진 sql과 비슷하게 써야한다..
             List<Team> resultTeam = em.createQuery("select t from Member m join m.team t",Team.class)
-                    .getResultList();
+                    .getResultList();*/
 
 
             /**
              * -임베디드 타입 프로젝션-
              */
 
-            em.createQuery("select o.address from Order o", Address.class)
-                    .getResultList();
+           /* em.createQuery("select o.address from Order o", Address.class)
+                    .getResultList();*/
 
             /**
              * -스칼라 타입 프로젝션-
              * 타입이 없기때문에 오브젝트로 돌려줌
              */
-             em.createQuery("select distinct m.username,m.age from Member m")
-                    .getResultList();
+        /*     em.createQuery("select distinct m.username,m.age from Member m")
+                    .getResultList();*/
 
             /**
              * 프로젝션 -여러 값 조회
              */
+
 
             /**
              * 첫방법
@@ -366,9 +411,8 @@ public class JpaMain {
              * SQL의 FROM(JOIN)절에 영향을줌
              */
 
-            em.flush();
-            em.clear();
-            //m.username은 사태필드, 더이상 타고들어갈 필드가없다 경로탐색의 끝
+
+           /* //m.username은 사태필드, 더이상 타고들어갈 필드가없다 경로탐색의 끝
             String query = "select m.username from Member m ";
 
             //단일값 연관 경로 m.team은 묵시적 내부조인발생, 탐색 더가능 m.team -> m.team.name //여기까지와서는 다시 상태필드가됨 (탐색 끝)
@@ -379,23 +423,231 @@ public class JpaMain {
             for (Team team3 : result) {
 
                 System.out.println("team3 = " + team3);
-            }
+            }*/
 
-            //컬렉션값 연관경로는 묵시적 내부조인 발생하지만 탐색은 x  -> m.members.username 이안됨 -> 해결책 (from절에 명시적인 조인사용
+        /*    //컬렉션값 연관경로는 묵시적 내부조인 발생하지만 탐색은 x  -> m.members.username 이안됨 -> 해결책 (from절에 명시적인 조인사용
             // 컬렉션 자체값을 조회하는거기떄문에 더 이상 타고들어가기 불사
             String query2 = "select t.members from Team t";
             Collection result2 = em.createQuery(query2,Collection.class).getResultList();
             for (Object o : result2) {
                 System.out.println("o = " + o);
-            }
-
+            }*/
+/*
             // m.member.username 까지 탐색하는 방법. from절에 명시적인 조인사용
             String query3 = "select m.username from Team t join t.members m"; //m.member.username 까지 탐색하는 방법. from절에 명시적인 조인사용
             List<String> resultList = em.createQuery(query3, String.class).getResultList();
 
             for (String s : resultList) {
                 System.out.println("s = " + s);
+            }*/
+
+
+            /**
+             * 페치 조인(fetch join)
+             * SQL 조인 종류 X
+             * JPQL 에서 성능 최적화를 위해 제공하는 기능
+             * ****연관된 엔티티나 컬렉션을 SQL 한 번에 함께 조회하는 기능***
+             * join fetch 명령어 사용
+             * 페치 조인 ::= [LEFT[OUTER] | INNER ] JOIN FETCH 조연깅로
+             */
+
+            /**
+             * 엔티티 페치 조인의 예제
+             * 회원을 조회하면서 연관된 팀도 함께 조회(SQL 한번에)
+             * SQL을 보면 회원 뿐만 아니라 팀(T.*)도 함께 SELECT
+             *
+             * [JPQL]
+             * select m from Member m join fetch m.team
+             *
+             * [SQL]
+             * select m.*,t.* member m inner join team t on m.team_id = t.id
+             */
+
+
+            /**
+             * @ManyToOne  or ManyToMany case
+             **/
+/*
+
+            String query = "select m from Member m"; //프록시
+            //String query = "select m from Member m join fetch m.team"; //프록시가아닌 진짜데이터 (한방쿼리) :: 페치 조인 엄청중요 (LAZY 로 설정을해놨어도 fetch join이 우선순위)
+            List<Member> resultList = em.createQuery(query, Member.class).getResultList();
+
+            for (Member members : resultList) {
+                System.out.println("member==" + members.getUsername() + ", " + members.getTeam().getName());
+                //LAZY 전략 이라
+                //회원1,팀A(SQL)
+                //회원2,팀A(1차캐시)
+                //회원3,팀B (sql)
+
+                //회원 100명 -> N + 1 문제
             }
+*/
+
+
+            /**
+             * 컬렉션 페치 조인
+             * 일대다 관계, 컬렉션 폐치 조인
+             *
+             * [JPQL]
+             * select t from Team t join fetch t.members where t.name='팀A';
+             *
+             * [SQL]
+             * SELECT T.*,M.* FROM TEAM T
+             * INNER JOIN MEMBER M ON T.ID = M.TEAM_ID
+             * WHERE T.NAME = '팀A'
+             *
+             * 일대 : 다 관계는 (뻥튀기 값이 나옴)
+             * 팀 A는 한개지만 , 팀A에 속한 맴버는 2개이기 때문에
+             * 팀 A를 조회하면 행이 2줄이나옴. 알아두자
+             */
+
+       /*    // String query = "select t FROM Team t";//사이즈 2개가 나옴
+            String query = "select t FROM Team t join fetch t.members";//결과는 같지만 사이즈가 3
+            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
+
+            System.out.println("resultList.size() = " + resultList.size());
+            for (Team team : resultList) {
+                System.out.println("team = " + team.getName() + " || " + team.getMembers().size());
+                for (Member member : team.getMembers()) {
+                    System.out.println("ㅡㅡ-> member = " + member);
+                }
+            }*/
+
+            /**
+             * 페치 조인과 DISTINCT 
+             * 1.SQL의 DISTINCT는 중복된 결과를 제거하는 명령
+             * 2.JPQL의 DISTINCT 2가지 기능 제공
+             *    -SQL에 DISTINCT를 추가
+             *    -애플리케이션에서 엔티티 중복 제거
+             */
+          /*  String query = "select t from Team t join t.members m"; //그냥 일반조인은 이시점에 로딩이안되있음 , 데이터가 없음
+            //String query = "select distinct t FROM Team t join fetch t.members ";//결과는 같지만 사이즈가 3 // 중복이있음
+            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
+
+            System.out.println("resultList.size() = " + resultList.size());
+            for (Team team : resultList) {
+                System.out.println("team = " + team.getName() + " || "  + team.getMembers().size());
+                for(Member member : team.getMembers()) {
+                    System.out.println("ㅡㅡ-> member = " + member);
+                }
+            }*/
+
+            /**
+             * 페치 조인과, 일반 조인의 차이
+             * 1.일반 조인 실행시 연관된 엔티티를 함께 조회하지 않는다.
+             * 2.JPQL은 결과를 반환할 때 연관관계 고려 X (딱 SELECT절에있는것만 가져옴)
+             * 3.여기서는 TEAM 엔티티만 조회하고, 회원 엔티티는 조회 X 
+             * 4.페치 조인을 사용할 때만 연관된 엔티티도 함께 조회가능(즉시 로딩)
+             * 5.페치 조인은 객체 그래프를 SQL 한번에 조회하는 개념
+             */
+
+
+            /**
+             * 패치 조인의 한계
+             * 1.패치 조인 대상에는 별칭을 줄 수 없다.
+             * 나랑 연관된것을 다 끌고오기 때문에 , 중간에 몇개를 걸러서 가져올수가 없다.
+             * EX1) 팀과 연관된 회원을 5명인데 한명만 불러온다치자. 잘못조작해서
+             * 나머지 4명이 누락될수있다. (이상하게 동작할 수 있다)
+             * EX2)총 5개인데 , 이쿼리를날려 결과가 3개만 나왔다 치자. team.member 를하면 3명만 조회가된다 나머지는 누락이됨.
+             * JPA의 의도는 이것이 아니다. 객체그래프는 모든 데이터를 조회 하는것이 기본이다.
+             * TEAM.MEMBER를 하는게아니라 애초에 MEMBER에서 5개를 조회해야한다.
+             * EX3)똑같은 TeamA를 두명이 조회했다고 하자 한명은 100개중 5개만 걸러서 조회하고
+             * 한명은 100개중 100개를 조회했다고 치자. 그러면 영속성 컨텍스트입장에선 이런 입장이
+             * 불문명하다.  웬만하면 alias(별칭) 를 쓰지말자.
+             * 객체그래프의 사상에 맞지않는다.!
+             String query = "select t From Team t join fetch t.members m where m.age > 10";
+
+             * 2.둘이상의 컬렉션은 패치조인 할 수 없다.
+             * 일대다 도 데이터 뻥튀기가 되는데 일대 다대 다 는 얼마나 뻥튀기가 되겠는가?
+             * TIP) 컬렉션의 패치조인은 딱하나만 지정 할 수있다 라고 기억하자!!! ****
+             *
+             * 3.컬렉션을 페치 조인하면 페이징 API(setFirstResult, setMaxResults)를 사용할 수 없다.
+             *    3-1.일대일, 다대일 같은 단일 값 연관 필드들은 페치 조인해도 페이징가능
+             *    why? 데이터 뻥튀기가 안되기때문.
+             *    ex)팀을 조회하는데 맴버 2개를 가지고있다고 해보자.
+             *    페이지 사이즈를 1에 데이터 한건만 가져와! 하면 맴버 반이잘려나가고 1개만 조회해버린다
+             *    (페이징은 철저히 데이터베이스 중심)
+             *    ex2)패치조인은 한방쿼리로 모든 관련데이터를 다끌고오기떄문에 100만건 데이터면
+             *    100만건을 메모리에 다올려버림 페이징할떄. 매우심각
+             *    3-2.하이버네이트는 경고 로그를 남기고 메모리에서 페이징은 매우 위험하다.
+             * 
+             * 페치조인의 특징
+             * 1.연관된 엔티티들을 SQL 한 번으로 조회 -성능 최적화
+             * 2.엔티티에 직접 적용하는 글로벌 로딩 전략보다 우선함
+             *    2-1. @OneToMany(fetch = FetchType.LAZY) //글로벌 로딩 전략
+             * 3.실무에서 글로벌 로딩 전략은 모두 지연 로딩
+             * 4.최적화가 필요한 곳은 페치 조인 적용 (N+1이 터지는곳에서 페치조인 적용하면 좋다?)
+             */
+         /*   //일대다 중심 쿼리인 아래쿼리로는 페이징이 매우 위험.
+            //String query = "select t from Team t join fetch t.members";
+
+            //대안1
+            //맴버를 중심으로 페이징 시작 회원 -> 팀은 다대일 (이러면 페이징 위험 x)
+            String query1 = "select m From Member m join fetch m.team t";
+
+            //대안2
+            //XML에 BATCH 사이즈 설정 이러면 N+1로안나가고 테이블 수만큼 맞춰서나가게 할 수있다.
+            //Team 엔티티에서 BatchSize 설정
+            //LAZY로딩이고, 조회가 여러번되기때문에 성능은 최악
+            //팀을한 10개 조회하면,, 연관된 맴버쿼리가 추가로 10번이 더나감...
+            String query2 = "select t From Team t";
+            List<Team> result = em.createQuery(query2,Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(4)
+                    .getResultList();
+
+            System.out.println("result.size() = " + result.size());
+
+            for (Team team : result) {
+                System.out.println("team = " + team.getName() + " || " + team.getMembers().size());
+                for (Member member : team.getMembers()) {
+                    System.out.println("ㅡㅡ-> member = " + member);
+                }
+            }*/
+/*
+            String query = "select t from Team t join fetch t.members";
+            List<Team> result = em.createQuery(query,Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(1)
+                    .getResultList();
+
+            for (Team team : result) {
+                System.out.println("팀이름 = " + team.getName());
+                for (Member member  : team.getMembers()){
+                    System.out.println("------------> member = " + member);
+                }
+            }*/
+
+
+             String query = "select t from Team t join t.members m";
+            List<Team> resultList = em.createQuery(query, Team.class).getResultList();
+
+            System.out.println("resultList.get(0).getMembers() = " + resultList.get(0).getMembers());
+
+
+
+
+
+
+
+
+
+
+
+            /**
+             * 페치 조인 -정리
+             * 1.모든 것을 페치 조인으로 해결할 수 는 없다.
+             * 2.페치 조인은 객체 그래프를 유지할 때 사용하면 효과적
+             * 3.여러 테이블을 조인해서 엔티티가 가진 모양이 아닌 전혀 다른 결과를
+             * 내야 하면, 페치 조인 보다는 일반 조인을 사용하고 필요한 데이터만 조회해서
+             * DTO로 반환하는 것이 효과적*/
+
+
+
+
+
+
 
             tx.commit();
         }catch (Exception e){
@@ -404,6 +656,7 @@ public class JpaMain {
         }finally {
             em.close();
         }
+
     }
 
 
