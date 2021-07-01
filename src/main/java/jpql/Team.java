@@ -42,11 +42,11 @@ public class Team {
 
     private String name;
 
-    //@BatchSize(size = 100) // 일대다 관계에서 페이징의 문제점.. N+1을 해결하기위해
+    @BatchSize(size = 100) // 일대다 관계에서 페이징의 문제점.. N+1을 해결하기위해
     //팀을 가져올때 이 members는 Lazy 로딩사상태 ,
     //main에서 레이지 로딩을 끌고올때 내팀뿐만아니라,
     //List<Team> result = em.createQuery 에 인쿼리를 100개씩넘겨 지금은 두개밖에없으면 두개씩만넘김
-    @OneToMany(mappedBy = "team",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "team",fetch = FetchType.LAZY)
     private List<Member> members = new ArrayList<>();
 
 
