@@ -677,6 +677,52 @@ public class JpaMain {
             for (Member member : resultList) {
                log.info("member={}",member);
             }*/
+
+            /**
+             * 벌크 연산  (여러 값을 한번에 처리하는것) (일반적인 크루드랑 같은데 이건 다량을 목적)
+             * 1.재고가 10개 미만인 모든 상품의 가격을 10% 상스하려면?
+             * 2.JPA 변경 감지 기능으로 실행하려면 너무 많은 SQL 실행
+             *  2-1.재고가 10개 미만인 상품을 리스트로 조회한다.
+             *  2.2. 상품 엔티티의 가격을 10% 증가한다
+             *  2.3. 트랜잭션 커밋 시점에 변경감지가 동작한다.
+             * 3.변경된 데이터가 100건이라면 100번의 update SQL 실행
+             */
+
+            /**
+             * 벌크 연산 예제
+             * 1.쿼리 한 번으로 여러 테이블 로우 변경(엔티티)
+             * 2.executeUpdate()의 결과는 영향받은 엔티티 수 반환
+             * UPDATE, DELETE 지원
+             * INERT(insert into ... select, 하이버네이트 지원)
+             */
+
+            //모든회원의 나이를 20살로 바꿔보자, 아래 update 벌크연산 처리전에 FLUSH 자동호출
+            //에는 영속성 컨텍스트랑 상관없이 그냥 db에 값을넣어버림;;
+            //영속 컨텍스트에는 age = 20 이 반영 x
+            int resultCount = em.createQuery("update Member m set m.age =20")
+                    .executeUpdate();
+
+            System.out.println("resultCount = " + resultCount);
+            System.out.println("member1.getAge() === " + member1.getAge());//안바뀜
+            System.out.println("member2.getAge() === " + member2.getAge());
+            em.clear();
+
+            Member findMember = em.find(Member.class, member1.getId());//영속컨텍스트 클리어후 다시가져옴
+
+            System.out.println("findMember.getAge() = " + findMember.getAge());
+
+
+
+
+
+
+            /**
+             * 벌크 연산 주의
+             * 1.벌크 연산은 영속성 컨텍스트를 무시하고 데이터베이스에 직접 쿼리 날려버림(flush() 발생)
+             *    해결을위한 방법
+             *      1.먼저 벌크 연산을 먼저 실행
+             *      2.벌크 연산 수행 후 영속성 컨텍스트 초기화
+             */
             tx.commit();
         }catch (Exception e){
             e.printStackTrace();
