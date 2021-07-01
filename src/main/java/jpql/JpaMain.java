@@ -625,7 +625,7 @@ public class JpaMain {
                 }
             }*/
 
-            String query = "select t from Team t join fetch t.members";
+     /*       String query = "select t from Team t join fetch t.members";
             List<Team> resultList = em.createQuery(query, Team.class).getResultList();
 
             for (Team team : resultList) {
@@ -633,8 +633,7 @@ public class JpaMain {
                 for(Member member : team.getMembers()){
                     System.out.println("------------>member = " + member);
                 }
-            }
-
+            }*/
 
             /**
              * 페치 조인 -정리
@@ -644,12 +643,40 @@ public class JpaMain {
              * 내야 하면, 페치 조인 보다는 일반 조인을 사용하고 필요한 데이터만 조회해서
              * DTO로 반환하는 것이 효과적*/
 
+ /*           //jpql은 식별자를 엔티티자체, 아이디 를사용해도 똑같이 db에 primary key 사용
+            String query = "select m from Member m where m = :member";
+            String query1 = "select m from Member m where m.id = :memberId";
+
+            //연관된 외래키값값
+           //m.team 은    @JoinColumn(name = "TEAM_ID") TEAM_ID를 말하는것
+            String foreignKey = "select m from Member m where m.team = :team";
+            String foreignKeyId = "select m from Member m where m.team.id = :teamId";
+            List<Member> memberId = em.createQuery(foreignKeyId, Member.class)
+                    .setParameter("teamId", teamB.getId())
+                    .getResultList();
 
 
+            for (Member member : memberId) {
+                System.out.println("member = " + member);
+            }
+*/
 
+            /**
+             * Named 쿼리 -정적 쿼리
+             * 1.미리 정의해서 이름을 부여해두고 사용하는 JPQL
+             * 2.정적 쿼리
+             * 3.어노테이션 ,XML에 정의
+             * 4.애플리케이션 로딩 시점에 초기화 후 재사용 (한마디로 로딩시점에 캐쉬에 넣어놓음) 비용 감소
+             * 5.애플리케이션 로딩 시점에 쿼리를 검증
+             */
+/*
+            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원1")
+                    .getResultList();
 
-
-
+            for (Member member : resultList) {
+               log.info("member={}",member);
+            }*/
             tx.commit();
         }catch (Exception e){
             e.printStackTrace();
