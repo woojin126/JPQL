@@ -63,13 +63,13 @@ public class JpaMain {
             member2.setAge(15);
             member2.setTeam(teamB);
             em.persist(member2);
-  /*
+
             Member member3 = new Member();
             member3.setUsername("회원3");
             member3.setAge(15);
-            member3.setTeam(teamB);
+            member3.setTeam(teamA);
             em.persist(member3);
-
+  /*
             Member member4 = new Member();
             member4.setUsername("회원4");
             member4.setTeam(teamD);
@@ -581,7 +581,8 @@ public class JpaMain {
              * 3.실무에서 글로벌 로딩 전략은 모두 지연 로딩
              * 4.최적화가 필요한 곳은 페치 조인 적용 (N+1이 터지는곳에서 페치조인 적용하면 좋다?)
              */
-        /*    //일대다 중심 쿼리인 아래쿼리로는 페이징이 매우 위험.
+            //일대다 중심 쿼리인 아래쿼리로는 페이징이 매우 위험.
+            //WARN org.hibernate.hql.internal.ast.QueryTranslatorImpl - HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!
             String query = "select t from Team t join fetch t.members";
 
             //대안1
@@ -594,23 +595,25 @@ public class JpaMain {
             //LAZY로딩이고, 조회가 여러번되기때문에 성능은 최악
             //팀을한 10개 조회하면,, 연관된 맴버쿼리가 추가로 10번이 더나감...
             String query2 = "select t From Team t";
+
             List<Team> result = em.createQuery(query2,Team.class)
                     .setFirstResult(0)
-                    .setMaxResults(2)
+                    .setMaxResults(8)
                     .getResultList();
-*//*
+
             System.out.println("result.size() = " + result.size());
 
-            for (Member member : result) {
+          /*  for (Member member : result) {
                 System.out.println("------------> member.getUsername() = " + member.getTeam());
+            }*/
 
-            }*//*
+
             for (Team team : result) {
                 System.out.println("team = " + team.getName() + " || " + team.getMembers().size());
                 for (Member member : team.getMembers()) {
                     System.out.println("ㅡㅡ-> member = " + member);
                 }
-            }*/
+            }
 /*
             String query = "select t from Team t join fetch t.members";
             List<Team> result = em.createQuery(query,Team.class)
@@ -699,7 +702,7 @@ public class JpaMain {
             //모든회원의 나이를 20살로 바꿔보자, 아래 update 벌크연산 처리전에 FLUSH 자동호출
             //에는 영속성 컨텍스트랑 상관없이 그냥 db에 값을넣어버림;;
             //영속 컨텍스트에는 age = 20 이 반영 x
-            int resultCount = em.createQuery("update Member m set m.age =20")
+           /* int resultCount = em.createQuery("update Member m set m.age =20")
                     .executeUpdate();
 
             System.out.println("resultCount = " + resultCount);
@@ -709,11 +712,7 @@ public class JpaMain {
 
             Member findMember = em.find(Member.class, member1.getId());//영속컨텍스트 클리어후 다시가져옴
 
-            System.out.println("findMember.getAge() = " + findMember.getAge());
-
-
-
-
+            System.out.println("findMember.getAge() = " + findMember.getAge());*/
 
 
             /**
