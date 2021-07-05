@@ -51,12 +51,12 @@ public class JpaMain {
             member1.setTeam(teamA);
             em.persist(member1);
 
-            Member member7 = new Member();
+        /*    Member member7 = new Member();
             member7.setUsername("회원7");
             member7.setAge(10);
             member7.setTeam(teamB);
             em.persist(member7);
-
+*/
 
           Member member2 = new Member();
             member2.setUsername("회원2");
@@ -594,26 +594,26 @@ public class JpaMain {
             //Team 엔티티에서 BatchSize 설정
             //LAZY로딩이고, 조회가 여러번되기때문에 성능은 최악
             //팀을한 10개 조회하면,, 연관된 맴버쿼리가 추가로 10번이 더나감...
-            String query2 = "select t From Team t";
+/*            String query2 = "select t From Team t";
 
             List<Team> result = em.createQuery(query2,Team.class)
                     .setFirstResult(0)
                     .setMaxResults(8)
                     .getResultList();
 
-            System.out.println("result.size() = " + result.size());
+            System.out.println("result.size() = " + result.size());*/
 
           /*  for (Member member : result) {
                 System.out.println("------------> member.getUsername() = " + member.getTeam());
             }*/
 
-
+/*
             for (Team team : result) {
                 System.out.println("team = " + team.getName() + " || " + team.getMembers().size());
                 for (Member member : team.getMembers()) {
                     System.out.println("ㅡㅡ-> member = " + member);
                 }
-            }
+            }*/
 /*
             String query = "select t from Team t join fetch t.members";
             List<Team> result = em.createQuery(query,Team.class)
@@ -672,8 +672,8 @@ public class JpaMain {
              * 4.애플리케이션 로딩 시점에 초기화 후 재사용 (한마디로 로딩시점에 캐쉬에 넣어놓음) 비용 감소
              * 5.애플리케이션 로딩 시점에 쿼리를 검증
              */
-/*
-            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+
+          /*  List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
                     .setParameter("username", "회원1")
                     .getResultList();
 
@@ -702,7 +702,7 @@ public class JpaMain {
             //모든회원의 나이를 20살로 바꿔보자, 아래 update 벌크연산 처리전에 FLUSH 자동호출
             //에는 영속성 컨텍스트랑 상관없이 그냥 db에 값을넣어버림;;
             //영속 컨텍스트에는 age = 20 이 반영 x
-           /* int resultCount = em.createQuery("update Member m set m.age =20")
+            int resultCount = em.createQuery("update Member m set m.age =20")
                     .executeUpdate();
 
             System.out.println("resultCount = " + resultCount);
@@ -712,7 +712,7 @@ public class JpaMain {
 
             Member findMember = em.find(Member.class, member1.getId());//영속컨텍스트 클리어후 다시가져옴
 
-            System.out.println("findMember.getAge() = " + findMember.getAge());*/
+            System.out.println("findMember.getAge() = " + findMember.getAge());
 
 
             /**
