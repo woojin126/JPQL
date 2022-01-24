@@ -46,11 +46,6 @@
 # 📌 API 명세서
 
 [gongu API 설계](https://spicy-soybean-437.notion.site/API-500270edac654b1aad72f02fab551300)
-<center><img src="https://images.velog.io/images/bellpro/post/f22f5ceb-509f-42fa-9431-145b568d5c30/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.45.05.png" width="800"></center>
-<center><img src="https://images.velog.io/images/bellpro/post/998964c3-091f-4190-b020-d5132b85a3ff/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.41.17.png" width="800"></center>
-<center><img src="https://images.velog.io/images/bellpro/post/c580bce2-974a-4e33-9bbe-bd53fb2d035d/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.41.38.png" width="800"></center>
-<center><img src="https://images.velog.io/images/bellpro/post/e348a40c-9d0f-442a-9d0a-743a04859783/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.42.20.png" width="800"></center>
-
 <br />
 
 # ⚙️ 기술 스택
