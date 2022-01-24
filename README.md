@@ -3,19 +3,19 @@
 
 <br />   
   
-- [\[사이트 바로가기\]](http://wordpad.s3-website.ap-northeast-2.amazonaws.com/)  
-- [\[시연영상 구경하기\]](https://www.youtube.com/watch?v=AyNuf-7WjU8)  
+- [\[사이트 바로가기\]](https://pingpong-market.shop/)  
+- [\[시연영상 구경하기\]]()  
 
 <br />
 
 # 👥 멤버
-- Back-end: [김종욱](https://github.com/bellpro), [김우진](https://github.com/woojin126), [서유리](https://github.com/uriseozz)
-- Front-end: [정연재](https://github.com/jeongyeon9254), [윤석준](https://github.com/seokjun2021)
-- [\[Front-End Github\]](https://github.com/hh99-velog/FE_Velog)
+- Back-end: [정영빈](https://github.com/jybin96), [김우진](https://github.com/woojin126), [서유리](https://github.com/uriseozz)
+- Front-end: [우민기](https://github.com/WooMinGy), [정민경](https://github.com/keimindev), [이주형](https://github.com/leejh4197)
+- [\[Front-End Github\]](https://github.com/Hanghae11-FinalProject/Front-end)
 <br />
 
 # 🗓 프로젝트 기간
-- 2021년 12월 12일 ~ 2021년 12월 18일 (6일 간)
+- 2022년 1월 11일 ~ 2022년 1월 28일
 
 <br />
 
