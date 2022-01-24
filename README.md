@@ -77,14 +77,13 @@
   
 </div>
 <br />
-<center><img src=https://user-images.githubusercontent.com/25544668/150839035-c1d3a7d3-ca79-49fd-ba8c-c50079d29c5f.png" width:"800"></center>
-
-
+<center><img src="https://user-images.githubusercontent.com/25544668/150839035-c1d3a7d3-ca79-49fd-ba8c-c50079d29c5f.png" width:"800"></center>
 
 <br />
 
 # 🔑 프로젝트 주요 기능
-
+* Nginx에 HTTPS SSL 적용
+  
 * 로그인 페이지  
   \- 가입된 회원의 정보와 일치하는지 확인 후, 일치할 경우 로그인 성공 
   \- 로그인시 jwt 토큰 발행
