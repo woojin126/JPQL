@@ -11,6 +11,7 @@
 # 👥 멤버
 - Back-end: [정영빈](https://github.com/jybin96), [김우진](https://github.com/woojin126), [서유리](https://github.com/uriseozz)
 - Front-end: [우민기](https://github.com/WooMinGy), [정민경](https://github.com/keimindev), [이주형](https://github.com/leejh4197)
+- Designer: [이인영],[정혜지]
 - [\[Front-End Github\]](https://github.com/Hanghae11-FinalProject/Front-end/tree/develop/project-11)
 <br />
 
@@ -36,7 +37,6 @@
 </p> 
 
 <br />
-https://user-images.githubusercontent.com/25544668/150820782-cee6883b-de1e-4608-906e-afa21764e1e3.png
 
 # 🗺 ER Diagram
 <center><img src="https://user-images.githubusercontent.com/25544668/150820782-cee6883b-de1e-4608-906e-afa21764e1e3.png" width="800"></center>
@@ -45,7 +45,7 @@ https://user-images.githubusercontent.com/25544668/150820782-cee6883b-de1e-4608-
 
 # 📌 API 명세서
 
-[Velog API 설계](https://www.notion.so/API-bd6f926fa8594a56a26de0c5e04b2c41)
+[gongu API 설계](https://spicy-soybean-437.notion.site/API-500270edac654b1aad72f02fab551300)
 <center><img src="https://images.velog.io/images/bellpro/post/f22f5ceb-509f-42fa-9431-145b568d5c30/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.45.05.png" width="800"></center>
 <center><img src="https://images.velog.io/images/bellpro/post/998964c3-091f-4190-b020-d5132b85a3ff/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.41.17.png" width="800"></center>
 <center><img src="https://images.velog.io/images/bellpro/post/c580bce2-974a-4e33-9bbe-bd53fb2d035d/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.41.38.png" width="800"></center>
