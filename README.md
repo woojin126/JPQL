@@ -74,9 +74,9 @@
   <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=black">
   <img src="https://img.shields.io/badge/aws-232F3E?style=for-the-badge&logo=AmazonAWS&logoColor=white">
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">  
-  
 </div>
 <br />
+# 🖼 아키텍쳐
 <center><img src="https://user-images.githubusercontent.com/25544668/150839035-c1d3a7d3-ca79-49fd-ba8c-c50079d29c5f.png" width:"800"></center>
 
 <br />
