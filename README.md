@@ -11,7 +11,7 @@
 # 👥 멤버
 - Back-end: [정영빈](https://github.com/jybin96), [김우진](https://github.com/woojin126), [서유리](https://github.com/uriseozz)
 - Front-end: [우민기](https://github.com/WooMinGy), [정민경](https://github.com/keimindev), [이주형](https://github.com/leejh4197)
-- [\[Front-End Github\]](https://github.com/Hanghae11-FinalProject/Front-end)
+- [\[Front-End Github\]](https://github.com/Hanghae11-FinalProject/Front-end/tree/develop/project-11)
 <br />
 
 # 🗓 프로젝트 기간
@@ -20,7 +20,7 @@
 <br />
 
 # 🧩 와이어프레임
-<center><img src="https://images.velog.io/images/bellpro/post/0cec925a-8417-467e-9d51-9b7e1edb104c/image.png" width="800"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150818035-4499a92c-0d19-4ce2-b4fa-b9efedf4229d.png" width="200"></center>
 
 <br />
 
