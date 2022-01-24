@@ -21,7 +21,13 @@
 
 # 🧩 와이어프레임
 <center><img src="https://user-images.githubusercontent.com/25544668/150818035-4499a92c-0d19-4ce2-b4fa-b9efedf4229d.png" width="200"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150818262-adc691ac-7b51-452f-9059-b1b0f275be6e.png" width="200"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150818398-326bcefe-aad1-4194-a97a-869dd8767498.png" width="200"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150818526-ec5f2fad-6b9c-4fad-80c5-e633ccf9dd38.png" width="200"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150818618-8b093db6-7cf5-409f-92f5-9623d3cfe8bb.png" width="200"></center>
 
+<center><img src="https://user-images.githubusercontent.com/25544668/150818262-adc691ac-7b51-452f-9059-b1b0f275be6e.png" width="200"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150818262-adc691ac-7b51-452f-9059-b1b0f275be6e.png" width="200"></center>
 <br />
 
 # 🗺 ER Diagram
