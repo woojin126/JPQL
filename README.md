@@ -1,5 +1,5 @@
-# 👀 Velog 클론코딩
-<img src="https://images.velog.io/images/bellpro/post/6fb24c2e-6af3-478b-84fa-ebb08e00ab5d/image.png"  width="100%">
+# 필요없거나 너무많아 버릴거 같은 물품 
+![image](https://user-images.githubusercontent.com/25544668/150814900-c43ea903-5b5b-4ef1-8928-4ca656b9866f.png)
 
 <br />   
   
