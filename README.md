@@ -36,9 +36,10 @@
 </p> 
 
 <br />
+https://user-images.githubusercontent.com/25544668/150820782-cee6883b-de1e-4608-906e-afa21764e1e3.png
 
 # 🗺 ER Diagram
-<center><img src="https://images.velog.io/images/bellpro/post/485cc8da-2b27-4f0a-a3c4-68f98266f518/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202021-12-17%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%205.31.22.png" width="800"></center>
+<center><img src="https://user-images.githubusercontent.com/25544668/150820782-cee6883b-de1e-4608-906e-afa21764e1e3.png" width="800"></center>
 
 <br />
 
